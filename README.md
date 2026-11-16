@@ -1,10 +1,8 @@
-# RGB Matrix Comic Windows
+# The Screens
 
-A Raspberry Pi-based project for driving RGB LED matrices with custom visuals & storytelling. It sequence text and animations to tell a narrative... It's like a digital LED comic book!
+A Raspberry Pi-based project for driving RGB LED matrices with custom silly visuals & almost storytelling. It sequence text and animations to tell (or not to tell) a narrative. It's like a digital LED comic book.
 
-(the project name is currently a work in progress...)
-
-<img width="2016" height="1008" alt="screens" src="https://github.com/user-attachments/assets/f77d65ed-3c7e-4749-bbfa-b8eccfb43ed2" />
+<img width="2896" height="1577" alt="IZPbEZ-O" src="https://github.com/user-attachments/assets/29a01de2-93d6-4cd9-9b2d-976ba1c52b4b" />
 
 ## Part 1: Development
 
