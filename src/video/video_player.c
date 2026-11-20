@@ -1,9 +1,5 @@
 #include "../../main.h"
 
-// Raw RGB video format:
-// - No header, just raw RGB24 pixels
-// - Each frame is width * height * 3 bytes
-// - Frames are stored sequentially
 int video_player_init(VideoPlayer *vp, const char *filepath, int video_fps, int prjct_fps)
 {
     memset(vp, 0, sizeof(VideoPlayer));

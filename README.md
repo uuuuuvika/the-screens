@@ -27,6 +27,7 @@ project/
 ```bash
 ssh raspberry@raspberrypi.local
 ```
+
 To rsync your local code with the Pi, refer to the `scripts/readme.md` 
 
 

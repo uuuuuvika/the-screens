@@ -1,9 +1,21 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <MagickWand/MagickWand.h>
 
-#include <led-matrix-c.h>
+#if defined(__has_include)
+#  if __has_include(<led-matrix-c.h>)
+#    include <led-matrix-c.h>
+#  else
+struct LedFont;
+struct LedCanvas;
+struct RGBLedMatrix;
+struct Color { uint8_t r; uint8_t g; uint8_t b; };
+#  endif
+#else
+#  include <led-matrix-c.h>
+#endif
+
+// #include <MagickWand/MagickWand.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
@@ -72,6 +84,7 @@ typedef struct
     int font_baseline;
     struct Color color;
     TextLines *lines;
+    size_t current_line;
     int x_orig;
     int y_orig;
     int x;
@@ -101,7 +114,6 @@ int matrix_setup(MatrixContext *ctx);
 void overdraw_half(struct LedCanvas *canvas, int width, int height, int left_half);
 int rand_range(int min, int max);
 
-char *load_text_from_file(const char *filename);
 TextLines *load_text_lines_from_file(const char *filename);
 int text_setup(MatrixContext *mctx, Text *top, Text *bottom);
 void text_update(MatrixContext *mctx, Text *top, Text *bottom, int should_move);
