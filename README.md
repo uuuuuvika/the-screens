@@ -25,11 +25,20 @@ project/
 
 ### Connect to your Raspberry Pi via SSH
 ```bash
-ssh raspberry@raspberrypi.local
+ssh <username>@pi
 ```
 
-To rsync your local code with the Pi, refer to the `scripts/readme.md` 
+### Sync code between Mac and Pi (from the ROOT)
 
+```bash
+rsync -azP --delete \
+  --filter=':- .gitignore' \
+  --exclude='.git/' \
+  --exclude='.DS_Store' \
+  -e ssh \
+  ../ \
+  vika@pi:/home/vika/screens/
+```
 
 ### Build and Run
 This will also build `rpi-rgb-led-matrix` library
@@ -37,6 +46,7 @@ This will also build `rpi-rgb-led-matrix` library
 ```bash
 make pro && sudo ./pro
 ```
+
 
 ## Part 2: Showcase 
 

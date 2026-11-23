@@ -23,13 +23,10 @@ int main(int argc, char **argv)
     }
     particle_animation_init(&particle_anim);
 
-    int half_width = mctx.width / 2;
-
     while (running)
     {
         led_canvas_fill(mctx.offscreen_canvas, 0, 0, 0);
-        particle_animation_draw(&particle_anim, &mctx, 0, half_width);
-        particle_animation_draw(&particle_anim, &mctx, half_width, half_width);
+        particle_animation_draw(&particle_anim, &mctx, PANEL_WIDTH, PANEL_HEIGHT * 2);
         usleep(25000);
 
         mctx.offscreen_canvas = led_matrix_swap_on_vsync(mctx.matrix, mctx.offscreen_canvas);

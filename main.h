@@ -1,18 +1,22 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-
 #if defined(__has_include)
-#  if __has_include(<led-matrix-c.h>)
-#    include <led-matrix-c.h>
-#  else
+#if __has_include(<led-matrix-c.h>)
+#include <led-matrix-c.h>
+#else
 struct LedFont;
 struct LedCanvas;
 struct RGBLedMatrix;
-struct Color { uint8_t r; uint8_t g; uint8_t b; };
-#  endif
+struct Color
+{
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+};
+#endif
 #else
-#  include <led-matrix-c.h>
+#include <led-matrix-c.h>
 #endif
 
 // #include <MagickWand/MagickWand.h>
@@ -29,49 +33,22 @@ struct Color { uint8_t r; uint8_t g; uint8_t b; };
 
 #define MATRIX_WIDTH 128
 #define MATRIX_HEIGHT 32
+#define PANEL_WIDTH 64.0
+#define PANEL_HEIGHT 32.0
 #define NUM_FRAMES 30
 #define FRAME_DELAY 4
 #define M_PI 3.14159265358979323846
 #define MAX_LOOPS 10
 #define MIN_LOOPS 5
 
-typedef struct {
+typedef struct
+{
     double time;
     int num_particles;
 } ParticleAnimation;
 
-// typedef struct {
-//     FILE *file;
-//     uint8_t *frame_buffer;
-//     int width;
-//     int height;
-//     int frame_size;
-//     int total_frames;
-//     int current_frame;
-//     int frame_skip;
-//     int frame_counter;
-//     int loop;
-//     int playing;
-// } VideoPlayer;
-
-typedef struct {
-    FILE *file;
-    uint8_t *frame_buffer;
-    int width;
-    int height;
-    int frame_size;
-    int total_frames;
-    int current_frame;
-
-    // --- Timing ---
-    float frame_step;        // Number of video frames to advance per project tick
-    float frame_accumulator; // Tracks fractional frame progress
-    
-    int loop;
-    int playing;
-} VideoPlayer;
-
-typedef struct {
+typedef struct
+{
     char **lines;
     size_t count;
     char *buffer;
@@ -111,7 +88,6 @@ typedef struct
 } MatrixContext;
 
 int matrix_setup(MatrixContext *ctx);
-void overdraw_half(struct LedCanvas *canvas, int width, int height, int left_half);
 int rand_range(int min, int max);
 
 TextLines *load_text_lines_from_file(const char *filename);
@@ -119,12 +95,11 @@ int text_setup(MatrixContext *mctx, Text *top, Text *bottom);
 void text_update(MatrixContext *mctx, Text *top, Text *bottom, int should_move);
 
 void particle_animation_init(ParticleAnimation *anim);
-void particle_animation_draw(ParticleAnimation *anim, MatrixContext *mctx, int x_offset, int width);
+void particle_animation_draw(ParticleAnimation *anim, MatrixContext *mctx,
+                             int width, int height);
+void plot_mapped_pixel(MatrixContext *mctx, double x, double y,
+                       int step_idx, int total_steps);
 
-int video_player_init(VideoPlayer *vp, const char *filepath, int video_fps, int prjct_fps);
-void video_player_draw(VideoPlayer *vp, MatrixContext *mctx, int x_offset);
-void video_player_cleanup(VideoPlayer *vp);
-
-void free_text_lines(TextLines *text_lines);
+void map_64x64_to_32x128_flipped(double *x, double *y);
 
 #endif

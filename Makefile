@@ -12,13 +12,10 @@ RGB_LIBDIR=$(RGB_LIB_DISTRIBUTION)/lib
 RGB_LIBRARY_NAME=rgbmatrix
 RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
 
-MAGICK_CFLAGS=$(shell pkg-config --cflags MagickWand)
-MAGICK_LDFLAGS=$(shell pkg-config --libs MagickWand)
-
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter
-CFLAGS+=-I$(RGB_INCDIR) $(MAGICK_CFLAGS)
+CFLAGS+=-I$(RGB_INCDIR)
 
-LDFLAGS+=$(RGB_LIBRARY) -lrt -lm -lpthread -lstdc++ $(MAGICK_LDFLAGS)
+LDFLAGS+=$(RGB_LIBRARY) -lrt -lm -lpthread -lstdc++
 
 all: $(PRO)
 

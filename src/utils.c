@@ -20,21 +20,6 @@ int matrix_setup(MatrixContext *ctx)
     return 1;
 }
 
-void overdraw_half(struct LedCanvas *canvas, int width, int height, int left_half)
-{
-    if (canvas == NULL)
-        return;
-    int start_x = left_half ? 0 : (width / 2);
-    int end_x = left_half ? (width / 2) : width;
-    for (int y = 0; y < height; ++y)
-    {
-        for (int x = start_x; x < end_x; ++x)
-        {
-            led_canvas_set_pixel(canvas, x, y, 0, 0, 0);
-        }
-    }
-}
-
 int rand_range(int min_inclusive, int max_inclusive)
 {
     if (max_inclusive <= min_inclusive)
@@ -42,14 +27,3 @@ int rand_range(int min_inclusive, int max_inclusive)
     int span = max_inclusive - min_inclusive + 1;
     return min_inclusive + (rand() % span);
 }
-
-void free_text_lines(TextLines *text_lines)
-{
-    if (text_lines)
-    {
-        free(text_lines->buffer);
-        free(text_lines->lines);
-        free(text_lines);
-    }
-}
-
