@@ -71,16 +71,6 @@ typedef struct
 
 typedef struct
 {
-    int text_frame_counter;
-    int text_frame_skip;
-    int particle_frame_counter;
-    int particle_frame_skip;
-    int prjct_fps;
-    int frame_delay_us;
-} FrameController;
-
-typedef struct
-{
     struct RGBLedMatrix *matrix;
     struct LedCanvas *offscreen_canvas;
     int width;
